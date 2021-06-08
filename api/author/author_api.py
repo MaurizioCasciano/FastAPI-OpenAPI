@@ -5,7 +5,7 @@ from domain.author import Author
 router = APIRouter(prefix="/authors")
 
 
-@router.get("/", response_model=list[Author])
+@router.get("/", tags=["Authors"], response_model=list[Author])
 def get_authors() -> list[Author]:
     authors: list[Author] = []
 
