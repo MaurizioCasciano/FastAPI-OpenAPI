@@ -6,8 +6,8 @@ from api.author.author_api import router as authors_router
 from api.book.book_api import router as books_router
 
 app = FastAPI()
-app.include_router(authors_router)
-app.include_router(books_router)
+app.include_router(authors_router, prefix="/authors")
+app.include_router(books_router, prefix="/books")
 
 app.add_middleware(CORSMiddleware,
                    allow_credentials=True,

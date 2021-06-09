@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from domain.book import Book
 
-router = APIRouter(prefix="/books")
+router = APIRouter()
 
 
 @router.get("/", tags=["Books"], response_model=list[Book])
