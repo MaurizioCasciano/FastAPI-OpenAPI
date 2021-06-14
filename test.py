@@ -1,4 +1,4 @@
-from stix2.v20.sdo import AttackPattern
+from stix2.v20.sdo import AttackPattern, CourseOfAction
 from stix2.utils import STIXdatetime
 
 from mitre.attack.ics.mitre_attack_ics import MitreAttackICS
@@ -30,3 +30,8 @@ if __name__ == '__main__':
                                                             **technique.__dict__)
 
     print(attack_pattern_dto.json())
+
+    mitigations: list[CourseOfAction] = mitre_attack_ics.get_mitigations()
+    mitigation: CourseOfAction = mitigations[0]
+
+    print(mitigation.serialize(sort_keys=False, indent=4))

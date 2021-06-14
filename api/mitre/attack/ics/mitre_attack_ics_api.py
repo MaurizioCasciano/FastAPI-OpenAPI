@@ -1,8 +1,9 @@
 from typing import List
 
 from fastapi import APIRouter
-from stix2.v20 import AttackPattern
+from stix2.v20 import AttackPattern, CourseOfAction
 
+from domain.mitre.attack.mitigation_dto import MitigationDTO
 from domain.mitre.attack.technique_dto import TechniqueDTO
 from mitre.attack.converter.mitre_attack_converter import MitreAttackConverter
 from mitre.attack.ics.mitre_attack_ics import MitreAttackICS
@@ -18,7 +19,20 @@ def get_techniques() -> List[TechniqueDTO]:
     techniques: List[TechniqueDTO] = []
 
     for attack_pattern in attack_patterns:
-        attack_pattern_dto: TechniqueDTO = MitreAttackConverter.convert_attack_pattern(attack_pattern)
-        techniques.append(attack_pattern_dto)
+        technique_dto: TechniqueDTO = MitreAttackConverter.convert_attack_pattern(attack_pattern)
+        techniques.append(technique_dto)
 
     return techniques
+
+
+@router.get("/mitigations", tags=["Mitigations"], response_model=List[MitigationDTO])
+def get_mitigations() -> List[MitigationDTO]:
+    course_of_actions: list[CourseOfAction] = mitre_attack_ics.get_mitigations()
+
+    mitigations_dto: List[MitigationDTO] = []
+
+    for course_of_action in course_of_actions:
+        mitigation_dto: MitigationDTO = MitreAttackConverter.convert_course_of_action(course_of_action)
+        mitigations_dto.append(mitigation_dto)
+
+    return mitigations_dto
