@@ -1,5 +1,5 @@
 from stix2 import TAXIICollectionSource, Filter
-from stix2.v20.sdo import AttackPattern
+from stix2.v20.sdo import AttackPattern, CourseOfAction
 from taxii2client.v20 import Collection
 
 from mitre.attack.mitre_attack import MitreAttack
@@ -16,4 +16,9 @@ class MitreAttackICS(MitreAttack):
         return self.source.query([
             Filter('type', '=', 'attack-pattern'),
             Filter('kill_chain_phases.kill_chain_name', '=', 'mitre-ics-attack')
+        ])
+
+    def get_mitigations(self) -> list[CourseOfAction]:
+        return self.source.query([
+            Filter('type', '=', 'course-of-action')
         ])
