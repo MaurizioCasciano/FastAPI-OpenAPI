@@ -1,12 +1,12 @@
 from stix2.v20 import AttackPattern
 
-from domain.mitre.attack.attack_pattern_dto import AttackPatternDTO, SpecVersion, Timestamp
+from domain.mitre.attack.technique_dto import TechniqueDTO, SpecVersion, Timestamp
 
 
 class MitreAttackConverter:
     @staticmethod
-    def convert_attack_pattern(attack_pattern: AttackPattern) -> AttackPatternDTO:
-        attack_pattern_dto: AttackPatternDTO = AttackPatternDTO(
+    def convert_attack_pattern(attack_pattern: AttackPattern) -> TechniqueDTO:
+        attack_pattern_dto: TechniqueDTO = TechniqueDTO(
             type=attack_pattern.get("type"),
             spec_version=SpecVersion.field_2_0,
             created=str(attack_pattern.get("created").replace(tzinfo=None)
