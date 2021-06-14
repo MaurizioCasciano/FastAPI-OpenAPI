@@ -27,6 +27,8 @@ class MitreAttackConverter:
         # attack_pattern_dto.modified = attack_pattern.get("modified")
         attack_pattern_dto.id = attack_pattern.get("id")
         # platforms
+        attack_pattern_dto.x_mitre_platforms = attack_pattern.get("x_mitre_platforms")
         # data sources
+        attack_pattern_dto.x_mitre_platforms = attack_pattern.get("x_mitre_data_sources")
 
         return attack_pattern_dto
