@@ -245,3 +245,11 @@ class AttackPatternDTO(Core):
         description='The list of kill chain phases for which this attack pattern is used.',
         min_items=1,
     )
+    x_mitre_platforms: Optional[List[str]] = Field(
+        None,
+        description='The list of platforms on which this attack pattern is used.',
+    )
+    x_mitre_data_sources: Optional[List[str]] = Field(
+        None,
+        description='The list of data sources used to identify this attack pattern'
+    )
